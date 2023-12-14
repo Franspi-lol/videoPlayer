@@ -1,0 +1,110 @@
+footer {
+  background-color: #c4c1c1;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+button{
+    background: none;
+    border: none;
+    
+    
+}
+svg{
+    fill: white;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+footer a img {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 5px;
+}
+footer a img:hover {
+  opacity: 0.2;
+}
+
+body {
+  background-color: #f4f4f4;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6em;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+
+.video-container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  margin-inline: auto;
+}
+video {
+  width: 100%;
+}
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  color: white;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.controls {
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  padding: 0 10px;
+}
+.controls > * {
+  margin-right: 10px;
+}
+.video-container:hover .video-controls,
+.video-container.paused .video-controls {
+  opacity: 1;
+}
+
+.volume {
+  display: flex;
+}
+
+.vol {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
+.volume:hover .vol {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+.progress {
+    
+  width: 100%;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.video-container:hover .progress,
+.video-container.paused .progress {
+  opacity: 1;
+}
+
+.fullscreen {
+  margin-left: auto;
+}
