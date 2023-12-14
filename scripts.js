@@ -1,4 +1,5 @@
-let videoFuente = "./assets/video/video.mp4";
+let arrayVideos = ['./assets/video/cayo_la_noche_1.mp4', './assets/video/video.mp4',];
+let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
 
 document.addEventListener("DOMContentLoaded", function () {
   let video = document.querySelector("video");
