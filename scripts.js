@@ -1,8 +1,6 @@
-let arrayVideos = ['./assets/video/cayo_la_noche_1.mp4'/* , './assets/video/video.mp4', */];
-let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
-
-
+/* require('dotenv').config(); */
 document.addEventListener("DOMContentLoaded", async function () {
+
   let video = document.querySelector("video");
   let videoContainer = document.querySelector(".video-container");
   let playButton = document.getElementById("play-pause");
@@ -12,14 +10,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   let vol = document.getElementById("vol");
   let progress = document.getElementById("progress");
   let fullscreen = document.getElementById("fullscreen");
-  
-   let url = await getVideo();
-   /* console.log(url); */
-  
 
-  video.src = videoFuente;
-
-  
+  video.src = await getRandomVideo(await getVideo());
 
   video.addEventListener("loadedmetadata", function () {
     /*muestra duracion del video*/ duration.innerHTML = formatTime(
@@ -123,7 +115,7 @@ function changeVolume(video, volume) {
 function fullScreenVideo(videoContainer, button) {
   if (document.fullscreenElement) {
     if (document.exitFullscreen()) {
-        button.innerHTML = `<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo
+      button.innerHTML = `<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo
       Mixer Tools -->
       <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -131,7 +123,6 @@ function fullScreenVideo(videoContainer, button) {
               stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>`;
       videoContainer.exitFullscreen();
-      
     }
   } else if (videoContainer.requestFullscreen()) {
     videoContainer.requestFullscreen();
@@ -146,25 +137,25 @@ function fullScreenVideo(videoContainer, button) {
 }
 
 async function getVideo() {
-  let apiKey = 'lwggiXgTQZGr4rAQM5X3ZPxfn6ZhM5BLBYH6AQgY5dz' ;
+  let apiKey = /* process.env.API_VIDEO_KEY */'lwggiXgTQZGr4rAQM5X3ZPxfn6ZhM5BLBYH6AQgY5dz';
 
-  let response = await fetch("https://sandbox.api.video/videos",{
-  headers : {
-    'Authorization': `Bearer ${apiKey}`
-  }
-});
-
+  let response = await fetch("https://sandbox.api.video/videos", {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
 
   let data = await response.json();
-  console.log(data);
+
   return data;
 }
 
-async function getRandomVideo(data){
-  let arrayVideos = data.url;
-  console.log(arrayVideos.length);
-  /* let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)]; */
+async function getRandomVideo(data) {
+  let arrayVideos = data.data;
+
+  let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
+
   videoFuente = videoFuente.assets.mp4;
-  console.log(videoFuente);
+
   return videoFuente;
 }
