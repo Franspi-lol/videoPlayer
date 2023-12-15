@@ -1,4 +1,4 @@
-let arrayVideos = ['./assets/video/cayo_la_noche_1.mp4', './assets/video/video.mp4',];
+let arrayVideos = ['./assets/video/cayo_la_noche_1.mp4'/* , './assets/video/video.mp4', */];
 let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
 
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
    /* console.log(url); */
   
 
-  video.src = getRandomVideo(url);
+  video.src = videoFuente;
 
   
 
@@ -160,9 +160,11 @@ async function getVideo() {
   return data;
 }
 
-function getRandomVideo(data){
+async function getRandomVideo(data){
   let arrayVideos = data.url;
-  let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
+  console.log(arrayVideos.length);
+  /* let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)]; */
   videoFuente = videoFuente.assets.mp4;
+  console.log(videoFuente);
   return videoFuente;
 }
