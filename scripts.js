@@ -1,7 +1,8 @@
 let arrayVideos = ['./assets/video/cayo_la_noche_1.mp4', './assets/video/video.mp4',];
 let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
 
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", async function () {
   let video = document.querySelector("video");
   let videoContainer = document.querySelector(".video-container");
   let playButton = document.getElementById("play-pause");
@@ -11,8 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let vol = document.getElementById("vol");
   let progress = document.getElementById("progress");
   let fullscreen = document.getElementById("fullscreen");
+  
+   let url = await getVideo();
+   /* console.log(url); */
+  
 
-  video.src = videoFuente;
+  video.src = getRandomVideo(url);
+
+  
 
   video.addEventListener("loadedmetadata", function () {
     /*muestra duracion del video*/ duration.innerHTML = formatTime(
@@ -136,4 +143,26 @@ function fullScreenVideo(videoContainer, button) {
                 stroke-linecap="round" stroke-linejoin="round" />
         </svg>`;
   }
+}
+
+async function getVideo() {
+  let apiKey = 'lwggiXgTQZGr4rAQM5X3ZPxfn6ZhM5BLBYH6AQgY5dz' ;
+
+  let response = await fetch("https://sandbox.api.video/videos",{
+  headers : {
+    'Authorization': `Bearer ${apiKey}`
+  }
+});
+
+
+  let data = await response.json();
+  console.log(data);
+  return data;
+}
+
+function getRandomVideo(data){
+  let arrayVideos = data.url;
+  let videoFuente = arrayVideos[Math.floor(Math.random() * arrayVideos.length)];
+  videoFuente = videoFuente.assets.mp4;
+  return videoFuente;
 }
