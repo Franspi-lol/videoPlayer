@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   let progress = document.getElementById("progress");
   let fullscreen = document.getElementById("fullscreen");
 
-  video.src = await getRandomVideo(await getVideo());
+  video.src = "./assets/video/video.mp4" /* await getRandomVideo(await getVideo()) */;
 
   video.addEventListener("loadedmetadata", function () {
     /*muestra duracion del video*/ duration.innerHTML = formatTime(
